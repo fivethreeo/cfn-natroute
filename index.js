@@ -8,7 +8,7 @@ var Lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
 var Delete = CfnLambda.SDKAlias({
   api: EC2,
   method: 'deleteRoute',
-  ignoreErrorCodes: [404, 409],
+  ignoreErrorCodes: [400, 404, 409],
   keys: [
     "DestinationCidrBlock",
     "RouteTableId"
