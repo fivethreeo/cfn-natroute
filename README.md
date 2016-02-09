@@ -1,13 +1,13 @@
 
-# cfn-elasticsearch-domain
+# cfn-natroute
 
 
 ## Purpose
 
-AWS CloudFormation does not support AWS Elasticsearch Service. This is a Lambda-backed custom resource to add support for [AWS Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/) to CloudFormation.
+AWS CloudFormation does not support AWS Routes to managed nat. This is a Lambda-backed custom resource to add support for [AWS Routes to managed nat](https://aws.amazon.com/elasticsearch-service/) to CloudFormation.
 
-[This package on NPM](https://www.npmjs.com/package/cfn-elasticsearch-domain)  
-[This package on GitHub](https://www.github.com/andrew-templeton/cfn-elasticsearch-domain)
+[This package on NPM](https://www.npmjs.com/package/cfn-natroute)  
+[This package on GitHub](https://www.github.com/fivethreeo/cfn-natroute)
 
 
 ## Implementation
@@ -16,6 +16,38 @@ This Lambda makes use of the Lambda-Backed CloudFormation Custom Resource flow m
 
 
 ## Usage
+
+    "PrivateRoute": {
+      "Type": "Custom::Natroute",
+      "DependsOn": "MyNatgateway",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::Join": [
+            ":",
+            [
+              "arn",
+              "aws",
+              "lambda",
+              {
+                "Ref": "AWS::Region"
+              },
+              {
+                "Ref": "AWS::AccountId"
+              },
+              "function",
+              "cfn-natroute-0-1-1"
+            ]
+          ]
+        },
+        "RouteTableId": {
+          "Ref": "PrivateRouteTable"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "MyNatgateway"
+        }
+      }
+    },
 
   See [`./example.template.json`](./example.template.json) for a sample CloudFormation template. The example uses `Condition` statements, `Parameters`, and dynamic `ServiceToken` generation fully.
 
@@ -44,11 +76,11 @@ You will have this resource installed in every supported Region globally!
   - [`us-west-2` / Oregon](https://console.aws.amazon.com/lambda/home?region=us-west-2#/create?step=2)
   - [`eu-west-1` / Ireland](https://console.aws.amazon.com/lambda/home?region=eu-west-1#/create?step=2)
   - [`ap-northeast-1` / Tokyo](https://console.aws.amazon.com/lambda/home?region=ap-northeast-1#/create?step=2)
-2. Zip this repository into `/tmp/Natgateway.zip`
+2. Zip this repository into `/tmp/Natroute.zip`
 
-    `$ cd $REPO_ROOT && zip -r /tmp/Natgateway.zip;`
+    `$ cd $REPO_ROOT && zip -r /tmp/Natroute.zip;`
 
-3. Enter a name in the Name blank. I suggest: `CfnLambdaResouce-Natgateway`
+3. Enter a name in the Name blank. I suggest: `CfnLambdaResouce-Natroute`
 4. Enter a Description (optional).
 5. Toggle Code Entry Type to "Upload a .ZIP file"
 6. Click "Upload", navigate to and select `/tmp/Natgateway.zip`

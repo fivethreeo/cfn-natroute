@@ -37,7 +37,6 @@ exports.handler = CfnLambda({
   Create: Create,
   Update: Create,
   Delete: Delete,
-  NoUpdate: NoUpdate,
   TriggersReplacement: [
     "DestinationCidrBlock",
     "RouteTableId",
