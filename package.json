@@ -1,14 +1,11 @@
 {
   "name": "cfn-natroute",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AWS CloudFormation Custom Lambda Resource | AWS Natroute",
   "main": "index.js",
-  "scripts": {
-    "cfn-lambda-deploy": "node ./node_modules/cfn-lambda/deploy.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fivethreeo/cfn-route.git"
+    "url": "git+https://github.com/fivethreeo/cfn-natroute.git"
   },
   "keywords": [
     "aws",
@@ -19,6 +16,7 @@
     "resource",
     "nat",
     "natgateway",
+    "route",
     "vpc",
     "ec2"
   ],
@@ -33,11 +31,6 @@
   },
   "homepage": "https://github.com/fivethreeo/cfn-natroute/#readme",
   "dependencies": {
-    "archiver": "^0.21.0",
-    "async": "^1.5.2",
-    "aws-sdk": "^2.2.32",
-    "jayschema": "0.3.1",
-    "string-format": "^0.5.0",
-    "cfn-lambda": "https://github.com/fivethreeo/cfn-lambda.git"
+    "cfn-lambda": "^0.8.3"
   }
 }
